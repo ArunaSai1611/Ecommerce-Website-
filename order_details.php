@@ -1,0 +1,49 @@
+
+<?php
+
+echo "<br>";
+$name=$_POST["uname"];
+echo "&emsp;&emsp;&emsp;&emsp;Customer name : " .$name ."<br>"."<br>";
+$email=$_POST["mail"];
+echo "&emsp;&emsp;&emsp;&emsp;Customer email: " .$email ."<br>"."<br>";
+$number=$_POST["number"];
+echo "&emsp;&emsp;&emsp;&emsp;Mobile number : " .$number ."<br>"."<br>";
+$message=$_POST["address"];
+echo "&emsp;&emsp;&emsp;&emsp;description : " .$message ."<br>"."<br>";
+$handler = mysqli_connect("localhost","root","","test");
+
+$query = "use test;";
+$resultQuery = mysqli_query($handler,$query);
+
+/*$query2 = "insert into customer_Details values('$name','$email','$number','$message');"; */
+$query1 = "insert into customer_Details values(?,?,?,?);";
+$initilize = mysqli_stmt_init($handler);
+if(!mysqli_stmt_prepare($initilize,$query1))
+	echo "failed";
+else
+{
+
+$message=$_POST["address"];
+	mysqli_stmt_bind_param($initilize,"ssss",$name,$email,$number,$message);
+	mysqli_stmt_execute($initilize);
+
+}
+?>
+<html>
+ <head>
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
+</head>
+    <body style=" background: radial-gradient(#ffffff,#ffd6d6);">
+    <center>
+        <div class="col text-success">
+    <h1>Thanks for ordering </h1>
+    <img src="Screenshot from 2023-08-17 09-21-19.png">
+</center>
+</div>
+    
+</body>
+</html>
+
